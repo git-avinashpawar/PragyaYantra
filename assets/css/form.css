@@ -1,0 +1,257 @@
+#form {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  position: relative;
+  background-color: var(--clr-background);
+  border-radius: 0px;
+}
+
+.form {
+  color: var(--clr-foreground);
+  min-height: 100%;
+}
+
+.form form {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0px;
+  align-items: center;
+}
+
+.submit-btn {
+  color: var(--clr-background);
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  width: 100%;
+}
+
+.left-content h1 {
+  font-size: calc(6vw + 2vh);
+}
+
+.form-control {
+  background-color: var(--clr-background);
+  color: var(--clr-foreground);
+}
+
+.form-control:focus {
+  background-color: var(--clr-background);
+  color: var(--clr-foreground);
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: var(--clr-foreground);
+  box-shadow: 0 0 6px var(--clr-foreground);
+  outline: 0 none;
+}
+
+.bottom {
+  padding-bottom: 2vh;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.left {
+  padding-left: 15%;
+}
+
+.form-link {
+  color: var(--clr-foreground);
+}
+
+.form-link a a:hover {
+  color: var(--clr-foreground);
+}
+
+.form-link span {
+  color: #0761d1;
+}
+
+.form-link p {
+  font-size: 15px;
+  text-align: center;
+}
+
+.heading h1 {
+  margin-top: 17%;
+  margin-bottom: 2%;
+  margin-left: 0px;
+  margin-right: 0px;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+}
+
+.input-group> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-left: -2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n + 3),
+.input-group:not(.has-validation)> :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.input-group-text {
+  background-color: var(--clr-background);
+  color: var(--clr-foreground);
+}
+
+#show_hide_password a {
+  color: var(--clr-foreground) !important;
+}
+
+.pass-link {
+  border: none;
+  background-color: var(--clr-background);
+  color: var(--clr-foreground);
+}
+
+.mod-head h5 {
+  font-size: calc(5px + 1rem);
+}
+
+.mod-head {
+  display: flex;
+  align-items: left;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  border-bottom: solid 1px var(--clr-foreground);
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+}
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0px;
+  color: var(--clr-background);
+}
+
+.modal-body form {
+  background-color: var(--clr-background);
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-left: 5%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 0.1rem;
+  outline: 0;
+  border: solid 1px var(--clr-foreground);
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.close-btn {
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+  border: none;
+}
+
+.close-btn i {
+  font-size: 1.5rem;
+}
+
+.sucess i {
+  color: #0761d1;
+}
+
+.fail i {
+  color: #e00;
+}
+
+.sucess,
+.fail {
+  background-color: var(--clr-background);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 3rem;
+}
+
+#modal-message h4 {
+  font-size: 2rem;
+  color: var(--clr-foreground);
+  text-align: center;
+}
+
+#modal-message h5 {
+  font-size: 1rem;
+  color: var(--clr-foreground);
+  text-align: center;
+}
+
+/* Modal Animation */
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Form Select */
+.form-select {
+  color: var(--clr-foreground);
+  background-color: var(--clr-background);
+}
+
+#library {
+  display: none;
+}
+
+#exam {
+  display: none;
+}

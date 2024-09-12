@@ -1,0 +1,305 @@
+.cardspace {
+  padding: 3vh;
+}
+
+#year {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  position: relative;
+}
+
+.heading h1 {
+  padding-top: 5vh;
+  padding-bottom: 2vh;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+}
+
+.heading2 h1 {
+  margin-top: 7%;
+  margin-bottom: 2%;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 40px;
+  text-align: center;
+}
+
+.heading h2 {
+  margin-top: 8%;
+  margin-bottom: 2%;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+}
+
+.heading h3 {
+  margin-top: 8%;
+  margin-bottom: 2%;
+  color: var(--clr-foreground);
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+}
+
+.card {
+  background-color: var(--clr-background);
+  border-radius: 0px;
+}
+
+.card .icon-box {
+  text-align: center;
+  border: 1px solid var(--clr-foreground);
+  padding: 8px;
+  transition: all ease-in-out 0.3s;
+  background: var(--clr-background);
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+  min-height: 100px;
+  padding-top: 10px;
+  /* cursor: pointer; */
+}
+
+.card .icon-box:hover {
+  border: 2px solid var(--clr-foreground);
+  transform: translateY(-10px);
+}
+
+.card .icon-box:hover::before {
+  opacity: 1;
+}
+
+.card .icon-box::before {
+  content: "";
+  background: linear-gradient(45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000);
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border-radius: 10px;
+  background-size: 400%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: glowEffect 10s linear infinite;
+}
+
+.card .icon-box::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-background);
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* btn2 */
+.card .icon-box::before {
+  filter: blur (5px);
+}
+
+@keyframes glowEffect {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 400% 0;
+  }
+}
+
+
+
+
+.card .icon-box .icon {
+  margin: 0 auto;
+
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.card .icon-box .icon i {
+  color: var(--clr-foreground);
+  font-size: 28px;
+  transition: ease-in-out 0.3s;
+}
+
+.card .icon-box h4 {
+  font-weight: 700;
+  margin-bottom: 0px;
+  font-size: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card .icon-box h4 a {
+  color: var(--clr-foreground);
+  transition: ease-in-out 0.3s;
+}
+
+.card .icon-box h4 a:hover {
+  color: var(--clr-foreground);
+}
+
+.card .icon-box p {
+  line-height: 24px;
+  font-size: 20px;
+  margin-bottom: 0;
+  color: var(--clr-foreground);
+}
+
+.none p a:hover {
+  color: var(--clr-foreground);
+}
+
+.s-text a {
+  color: var(--clr-foreground);
+}
+
+.clr-fore a i {
+  color: var(--clr-foreground);
+}
+
+/* _____________Profile_________ */
+.gear {
+  padding-right: 1%;
+  color: var(--clr-foreground);
+}
+
+.fa-cog {
+  animation: fa-spin 2s infinite linear;
+  font-size: 1.5rem;
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.profile h6 {
+  display: inline-block !important;
+}
+
+.card-profile .icon-box {
+  text-align: center;
+  border: 1px solid var(--clr-foreground);
+  padding: 8px;
+  transition: all ease-in-out 0.3s;
+  background: var(--clr-background);
+  height: auto;
+  border-radius: 7px;
+  min-height: 100px;
+  padding-top: 10px;
+  max-width: 340px;
+  min-width: 340px;
+}
+
+.card-profile h2 {
+  color: var(--clr-foreground);
+}
+
+.profile i {
+  font-size: 32px;
+  padding: 10px;
+}
+
+.profile i:hover {
+  transform: translateY(-2px);
+}
+
+.profile h4,
+.profile h5 {
+  padding: 10px;
+}
+
+.skills {
+  border: solid 1px var(--clr-foreground);
+  color: var(--clr-background);
+  border-radius: 0.25rem;
+  background: var(--clr-foreground);
+  padding: 5px;
+  margin: 10px;
+}
+
+.skills:hover,
+.skills-change:hover,
+.skills-delete:hover,
+.confirm:hover {
+  transform: translateY(-2px);
+}
+
+.skills-change {
+  border: solid 1px #0761d1;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: var(--clr-background);
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+
+.skills-delete {
+  border: solid 1px #e00;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: #e00;
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+
+.confirm {
+  border: solid 1px #0761d1;
+  color: var(--clr-foreground);
+  border-radius: 0.25rem;
+  background: #0761d1;
+  padding: 5px;
+  margin: 10px;
+  font-size: 15px;
+}
+
+.profile-button {
+  border: none;
+  background: var(--clr-background);
+  margin: 5px;
+}
