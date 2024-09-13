@@ -590,13 +590,8 @@ section {
 
 .img-fluid {
   width: 100px;
-  height: auto;
-  fill: var(--clr-foreground);
-}
-
-.img-fluid svg {
-  width: 100px;
-  height: auto;
+  height: 100px;
+  margin-bottom: 0px;
   fill: var(--clr-foreground);
 }
 
