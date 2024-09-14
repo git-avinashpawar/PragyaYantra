@@ -79,7 +79,7 @@ button:hover {
 .response {
     align-items: flex-start;
     /* Align content to the top */
-    padding: 0px 20px 10px 15px;
+    padding: 0px 20px 10px 45px;
     margin-left: 15px;
     background: var(--clr-background);
     display: inline-block;
@@ -87,7 +87,7 @@ button:hover {
     /* Set a maximum height */
     overflow-y: auto;
     /* Enable vertical scrolling */
-    min-width: 55vw;
+    max-width: 58vw;
 }
 
 .aiImg {
@@ -112,7 +112,6 @@ button:hover {
     text-align: justify;
     word-wrap: break-word;
     /* Ensure long words break and don't overflow */
-    padding-left: 25px;
 }
 
 /* Horizontal scrollbar height */
