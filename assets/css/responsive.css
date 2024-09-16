@@ -1,0 +1,225 @@
+/* rem is font size dependent  */
+
+
+/* Width between 1200x to 0 */
+
+@media (min-width: 1200px)and (max-width: 1920px) {
+    .input-container button {
+
+        width: 120px;
+    }
+}
+
+/* Width between 992px to 1199px  */
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/*Width between 768px to 991px */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .chat-container {
+        padding: 10px;
+    }
+
+    /* Horizontal scrollbar height */
+    .chat-container::-webkit-scrollbar {
+        width: 8px;
+        height: 7px;
+
+        /* Adjust the height of the horizontal scrollbar */
+    }
+}
+
+/* Width between 767px to 0 */
+
+@media (max-width: 767px) {
+    .chat-container {
+        padding: 10px;
+    }
+
+    /* Horizontal scrollbar height */
+    .chat-container::-webkit-scrollbar {
+        width: 8px;
+        height: 7px;
+
+        /* Adjust the height of the horizontal scrollbar */
+    }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+    input[type="text"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .input-container button {
+
+        font-size: 14px;
+    }
+
+    .copyright {
+        font-size: 12px;
+    }
+
+    .chat-bubble p {
+        padding: 0px;
+        font-size: 12px;
+        line-height: 1;
+    }
+
+    .chat-bubble li {
+        font-size: 12px;
+    }
+
+    .chat-bubble {
+        margin: 0px;
+    }
+
+    .profile-pic {
+        width: 30px;
+        height: 30px;
+        margin-top: 0px;
+    }
+}
+
+/* Width between 600px to 0*/
+
+@media (min-width: 480px) and (max-width: 600px) {
+    input[type="text"] {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .input-container button {
+
+        font-size: 12px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
+
+    .chat-bubble p {
+        padding: 0px;
+        font-size: 12px;
+        line-height: 1;
+    }
+
+    .chat-bubble li {
+        font-size: 12px;
+    }
+
+    .chat-bubble {
+        margin: 0px;
+    }
+
+    .profile-pic {
+        width: 30px;
+        height: 30px;
+        margin-top: 0px;
+    }
+
+    .ai-bubble {
+        padding-left: 2px;
+    }
+}
+
+/* Width between 480px to 0*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    input[type="text"] {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .input-container button {
+
+        font-size: 12px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
+
+    .chat-bubble p {
+        padding: 0px;
+        font-size: 12px;
+        line-height: 1;
+    }
+
+    .chat-bubble li {
+        font-size: 12px;
+    }
+
+    .chat-bubble li {
+        font-size: 12px;
+    }
+
+    .chat-bubble {
+        margin: 0px;
+    }
+
+    .profile-pic {
+        width: 28px;
+        height: 28px;
+        margin-top: 0px;
+    }
+
+    .ai-bubble {
+        padding-left: 2px;
+    }
+
+    .info h4,
+    .info h5 {
+        font-size: 14px;
+    }
+
+}
+
+/* Width between 320px to 0 */
+
+@media (max-width: 320px) {
+    input[type="text"] {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .input-container button {
+
+        font-size: 12px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
+
+    .chat-bubble p {
+        padding: 0px;
+        font-size: 12px;
+        line-height: 1;
+    }
+
+    .chat-bubble li {
+        font-size: 12px;
+    }
+
+
+    .chat-bubble {
+        margin: 0px;
+    }
+
+    .profile-pic {
+        width: 25px;
+        height: 25px;
+        margin-top: 5px;
+    }
+
+    .ai-bubble {
+        padding-left: 2px;
+    }
+
+    .info h4,
+    .info h5 {
+        font-size: 12px;
+    }
+}

@@ -47,6 +47,7 @@
 
 .sp {
   font-family: "Century Gothic";
+
 }
 
 .splogo {
@@ -366,12 +367,13 @@ i {
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
+  position: sticky;
 }
 
 #header.header-scrolled,
 #header.header-inner-pages {
   background: var(--clr-background);
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 #header .logo {
@@ -402,7 +404,7 @@ i {
 
 /*-------------- Sections General ------------------*/
 section {
-  padding: 60px 0;
+  /* padding: 60px 0; */
   overflow: hidden;
 }
 
@@ -602,4 +604,18 @@ section {
 ol,
 ul {
   padding-left: 1rem;
+}
+
+.copyright {
+  text-align: center;
+  padding: 5px;
+  color: var(--clr-grey);
+  font-size: 15px;
+}
+
+#form {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  position: relative;
 }

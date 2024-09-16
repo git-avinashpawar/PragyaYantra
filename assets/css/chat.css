@@ -1,0 +1,210 @@
+.chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: var(--clr-background);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: calc(100vh - 205px);
+}
+
+.chat-bubble-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+/* Align user messages to the right */
+.user-container {
+    justify-content: flex-end;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+    padding: 10px;
+    border-radius: 15px;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+/* User bubble on the right */
+.user-bubble {
+    background-color: #0d6efd;
+    color: var(--clr-background);
+    border-bottom-right-radius: 0;
+    max-width: 70%;
+}
+
+/* AI bubble on the left */
+.ai-bubble {
+    background-color: var(--clr-background);
+    color: var(--clr-foreground);
+    border-bottom-left-radius: 0;
+    overflow-y: auto;
+    padding-left: 20px;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px;
+    background-color: var(--clr-background);
+    justify-content: center;
+    /* Center the form horizontally */
+    align-items: center;
+    /* Center the form vertically */
+    border: 2px solid var(--clr-foreground);
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+
+    border: none;
+    padding: 10px 30px 10px 30px;
+    width: 50vw;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: var(--clr-background);
+    color: var(--clr-foreground);
+    outline: none;
+}
+
+.input-container button {
+    padding: 10px 25px;
+    margin-left: 10px;
+    background-color: #0d6efd;
+    color: var(--clr-background);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.input-container button:hover {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: var(--clr-foreground);
+    border: 1px solid var(--clr-foreground);
+}
+
+/* Profile pictures */
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 7px;
+}
+
+
+p {
+    margin: 0px;
+}
+
+.think {
+    background: var(--clr-background);
+    position: relative;
+    border: none;
+    /* Added */
+}
+
+.think::before {
+    content: "";
+    background: linear-gradient(45deg,
+            #ff0000,
+            #ff7300,
+            #fffb00,
+            #48ff00,
+            #00ffd5,
+            #002bff,
+            #7a00ff,
+            #ff00c8,
+            #ff0000);
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+
+    position: absolute;
+    /* Added */
+    border-radius: 20px;
+    background-size: 400%;
+    z-index: -1;
+    /* Ensure it's not behind content */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    animation: glowEffect 10s linear infinite;
+    border: none;
+}
+
+.think::after {
+    background: var(--clr-background);
+}
+
+@keyframes glowEffect {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 400% 0;
+    }
+}
+
+/* Horizontal scrollbar height */
+.chat-container::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+
+    /* Adjust the height of the horizontal scrollbar */
+}
+
+/* Scrollbar track */
+.chat-container::-webkit-scrollbar-track {
+    background: var(--clr-background);
+    border-radius: 10px;
+    /* Rounded corners on the track */
+    margin-block: 30px;
+    margin-right: -10px;
+}
+
+/* Scrollbar thumb */
+.chat-container::-webkit-scrollbar-thumb {
+    /* background-color: var(--clr-grey); */
+    border-radius: 9999px;
+    border: 2px solid var(--clr-grey);
+    /* Rounded corners on the thumb */
+
+
+}
+
+/* On hover */
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--clr-grey);
+}
+
+.chat-container::-webkit-scrollbar-button {
+    display: none;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+
+.info img,
+.info svg {
+    text-align: center;
+    height: auto;
+    fill: var(--clr-foreground);
+    margin: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+.info ul li {
+    text-align: justify;
+}
