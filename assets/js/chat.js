@@ -30,9 +30,6 @@ async function getResponse(message) {
 
   const chat = model.startChat({
     history: history,
-    generationConfig: {
-      maxOutputTokens: 500,
-    },
   });
   let result = await chat.sendMessage(message);
   var aiMessage = result.response.text();
@@ -43,9 +40,9 @@ async function getResponse(message) {
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const message = input.value.trim();
-  document.getElementById("chatbox").classList.add("think");
 
   if (message === "") return;
+  document.getElementById("chatbox").classList.add("think");
   document.getElementById("info").style.display = "none";
   // Add user message with profile picture
   addChatBubble(

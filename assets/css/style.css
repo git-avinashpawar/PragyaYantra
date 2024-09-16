@@ -619,3 +619,7 @@ ul {
   background-size: cover;
   position: relative;
 }
+
+h5 {
+  color: var(--clr-grey);
+}

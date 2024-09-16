@@ -1,3 +1,5 @@
+// Important note Gemini tracks the history itself no need to push messages in history on your own
+
 //Import @google/generative-ai.
 import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
@@ -7,45 +9,110 @@ import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 // Import  AI_ABCD
 import { ABCD } from "../config/config.js";
 
-async function getResponse() {
-  // Form Inputs
-  document.getElementById("chatbox").style.removeProperty("border");
-  const userInput = document.getElementById("userInput").value;
-  const responseContainer = document.getElementById("responseContainer");
-  // const botResponse1 = document.getElementById("botResponse1");
-  const botResponse = document.getElementById("botResponse");
+let history = [
+  {
+    role: "user",
+    parts: [{ text: "Hello" }],
+  },
+  {
+    role: "model",
+    parts: [{ text: "Great to meet you. What would you like to know?" }],
+  },
+];
 
-  // Fetch your AI_ABCD
-  const AI_ABCD = ABCD;
-  // Make sure to include these imports:
-  // import { GoogleGenerativeAI } from "@google/generative-ai";
-  const genAI = new GoogleGenerativeAI(AI_ABCD);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+async function getResponse(message, retries = 3, delay = 1000) {
+  try {
+    // Fetch your AI_ABCD
+    const AI_ABCD = ABCD;
+    const genAI = new GoogleGenerativeAI(AI_ABCD);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-  var prompt = "Write a story about a magic backpack and a magic book.";
+    const chat = model.startChat({
+      history: history,
+    });
 
-  if (userInput === "") {
-    document.getElementById("userInput").placeholder = "Prompt Can't blank.";
-    document.getElementById("chatbox").style.border = "2px solid #e00";
-    return; // Exit the function if the input is blank
-  } else {
-    prompt = userInput;
+    let result = await chat.sendMessage(message);
+    var aiMessage = result.response.text();
+    console.log(aiMessage);
+    return aiMessage;
+  } catch (error) {
+    // Handle the "server busy" or other transient errors
+    console.error("Error fetching from Google Generative AI:", error);
+
+    if (retries > 0) {
+      console.log(`Retrying in ${delay}ms... (${retries} attempts left)`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return getResponse(message, retries - 1, delay * 2); // Exponential backoff
+    } else {
+      console.error("Max retries reached. Unable to fetch response.");
+      return "Sorry, I couldn't get a response from the AI. Please try again later.";
+    }
   }
-  document.getElementById("chatbox").classList.add("think");
-  const result = await model.generateContent(prompt);
-
-  //console.log(result.response.text());
-
-  // botResponse1.textContent = `Prompt: ${userInput}`;
-
-  // Simulate bot response based on user input
-  botResponse.innerHTML = marked.parse(result.response.text());
-
-  document.getElementById("chatbox").classList.remove("think");
-  // Show the response container
-  responseContainer.style.display = "block";
 }
 
-document.getElementById("chat").onclick = function () {
-  getResponse();
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+
+  if (message === "") return;
+  document.getElementById("chatbox").classList.add("think");
+  document.getElementById("info").style.display = "none";
+  // Add user message with profile picture
+  addChatBubble(
+    message,
+    "user-bubble",
+    "user-container",
+    "./assets/img/user.png"
+  );
+
+  //Write function to get ai resonse
+  var aiMessage = await getResponse(message);
+  // var aiMessage = "To give you the best suggestions, I need to know more";
+  // Simulate AI response (replace with actual AI integration)
+
+  addChatBubble(
+    aiMessage,
+    "ai-bubble",
+    "ai-container",
+    "./assets/img/artificial-intelligence.png"
+  );
+  document.getElementById("chatbox").classList.remove("think");
+  input.value = ""; // Clear input after sending message
+  input.focus();
+  console.log(history);
+}
+
+function addChatBubble(text, bubbleClass, containerClass, profilePic) {
+  const chatContainer = document.getElementById("chat");
+  const bubbleContainer = document.createElement("div");
+  bubbleContainer.classList.add("chat-bubble-container", containerClass);
+
+  // Profile Picture
+  const img = document.createElement("img");
+  img.src = profilePic;
+  img.alt = "Profile";
+  img.classList.add("profile-pic");
+
+  // Chat Bubble
+  const bubble = document.createElement("div");
+  bubble.classList.add("chat-bubble", bubbleClass);
+  bubble.innerHTML = marked.parse(text);
+
+  // Append image and bubble to the container
+  if (containerClass === "user-container") {
+    bubbleContainer.appendChild(bubble);
+    bubbleContainer.appendChild(img); // User picture on the right
+  } else {
+    bubbleContainer.appendChild(img); // AI picture on the left
+    bubbleContainer.appendChild(bubble);
+  }
+
+  chatContainer.appendChild(bubbleContainer);
+
+  // Scroll to bottom of chat
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+document.getElementById("send").onclick = function () {
+  sendMessage();
 };
