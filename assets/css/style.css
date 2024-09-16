@@ -4,6 +4,7 @@
   --clr-background: hsl(0 0% 100%);
   --clr-grey: #7d7d7d;
   --clr-back: #a9a9a94d;
+  --clr-code: #aaccdd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +13,7 @@
     --clr-foreground: hsl(0 0% 100%);
     --clr-grey: #7d7d7d;
     --clr-back: #a9a9a94d;
+    --clr-code: #aaccdd;
   }
 }
 
@@ -20,6 +22,7 @@
   --clr-background: hsl(0 0% 100%);
   --clr-grey: #7d7d7d;
   --clr-back: #a9a9a94d;
+  --clr-code: #aaccdd;
 }
 
 .dark-theme {
@@ -27,6 +30,7 @@
   --clr-foreground: hsl(0 0% 100%);
   --clr-grey: #7d7d7d;
   --clr-back: #a9a9a94d;
+  --clr-code: #555555;
 }
 
 /*----------------SPECIAL--------------------*/

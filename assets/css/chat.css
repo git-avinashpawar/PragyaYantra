@@ -210,3 +210,26 @@ p {
 .info ul li {
     text-align: justify;
 }
+
+code {
+    font-size: .875em;
+    color: var(--clr-foreground);
+    word-wrap: break-word;
+    background: var(--clr-code);
+    padding: 1px 5px 1px 5px;
+}
+
+strong {
+    font-weight: 600;
+}
+
+pre {
+    word-wrap: break-word;
+    background: var(--clr-code);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.hljs {
+    background: var(--clr-code);
+}

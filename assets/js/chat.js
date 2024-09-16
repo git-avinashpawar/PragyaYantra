@@ -67,6 +67,9 @@ async function sendMessage() {
   input.value = ""; // Clear input after sending message
   input.focus();
   console.log(history);
+  document.querySelectorAll("pre code").forEach((block) => {
+    hljs.highlightElement(block); // Highlight each new code block
+  });
 }
 
 function addChatBubble(text, bubbleClass, containerClass, profilePic) {

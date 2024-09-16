@@ -107,21 +107,25 @@ function enableDarkMode() {
   document.body.classList.remove("light-theme");
   document.body.classList.add("dark-theme");
   localStorage.setItem("Theme", "dark");
+  document.getElementById("ctheme").href =
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css";
 }
 
 function enableLightMode() {
   document.body.classList.remove("dark-theme");
   document.body.classList.add("light-theme");
   localStorage.setItem("Theme", "light");
+  document.getElementById("ctheme").href =
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css";
 }
 
 function setThemePreference() {
   var T = localStorage.getItem("Theme");
-  if (T == "dark") {
-    enableDarkMode();
+  if (T == "light") {
+    enableLightMode();
     return;
   }
-  enableLightMode();
+  enableDarkMode();
 }
 
 document.onload = setThemePreference();
