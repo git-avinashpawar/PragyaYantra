@@ -44,21 +44,28 @@
 
         /* Adjust the height of the horizontal scrollbar */
     }
+
+    #pin svg {
+        height: 30px;
+        width: 30px;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 767px) {
-    input[type="text"] {
+    textarea#userInput {
         font-size: 14px;
-        padding: 10px;
+        padding: 10px 5px 10px 5px;
+        max-width: 48vw;
     }
 
     .input-container button {
-
         font-size: 14px;
+        margin: 0px;
     }
 
     .copyright {
         font-size: 12px;
+        margin: 0px;
     }
 
     .chat-bubble p {
@@ -85,14 +92,14 @@
 /* Width between 600px to 0*/
 
 @media (min-width: 480px) and (max-width: 600px) {
-    input[type="text"] {
+    textarea#userInput {
         font-size: 12px;
         padding: 10px;
     }
 
     .input-container button {
-
         font-size: 12px;
+        margin: 0px;
     }
 
     .copyright {
@@ -127,14 +134,15 @@
 /* Width between 480px to 0*/
 
 @media (min-width: 320px) and (max-width: 480px) {
-    input[type="text"] {
+    textarea#userInput {
         font-size: 12px;
-        padding: 10px;
+        padding: 10px 5px 10px 5px;
     }
 
     .input-container button {
-
         font-size: 12px;
+        margin: 0px;
+        padding: 10px;
     }
 
     .copyright {
@@ -179,14 +187,15 @@
 /* Width between 320px to 0 */
 
 @media (max-width: 320px) {
-    input[type="text"] {
+    textarea#userInput {
         font-size: 12px;
-        padding: 10px;
+        padding: 10px 5px 10px 5px;
     }
 
     .input-container button {
-
         font-size: 12px;
+        margin: 0px;
+        padding: 10px;
     }
 
     .copyright {
