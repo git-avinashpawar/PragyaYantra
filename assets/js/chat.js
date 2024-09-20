@@ -154,7 +154,6 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   const img = document.createElement("img");
   img.src = profilePic;
   img.alt = "Profile";
-  img.classList.add("profile-pic");
 
   // Chat Bubble
   const bubble = document.createElement("div");
@@ -163,10 +162,12 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   // Append image and bubble to the container
   if (containerClass === "user-container") {
     bubble.textContent = text;
+    img.classList.add("profile-pic");
     bubbleContainer.appendChild(bubble);
     bubbleContainer.appendChild(img); // User picture on the right
   } else {
     bubble.innerHTML = marked.parse(text);
+    img.classList.add("ai-profile-pic");
     bubbleContainer.appendChild(img); // AI picture on the left
     bubbleContainer.appendChild(bubble);
   }
