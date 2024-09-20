@@ -14,7 +14,7 @@ function err(errormsg) {
 
 function sanitize() {
   textArea.style = "height:45px; overflow-y:hidden";
-  if (document.getElementById("attachmentPreview").style.display == "none")
+  if (document.getElementById("attachmentContainer").style.display != "block")
     chatArea.style.height = "calc((var(--vh, 1vh) * 100) - 205px";
 }
 
@@ -43,13 +43,14 @@ function addLine() {
 
 textArea.addEventListener("input", function () {
   document.getElementById("chatbox").classList.remove("err");
-  if (textArea.value.split("\n").length === 1) {
-    if (document.getElementById("attachmentPreview").style.display == "none")
-      addLine();
-  }
-  if (textArea.value.split("\n").length > 1) {
-    textArea.style = "height:200px; overflow-y:visible";
-    chatArea.style.height = "calc((var(--vh, 1vh) * 100) - 360px)";
+  if (document.getElementById("attachmentContainer").style.display != "block") {
+    if (textArea.value.split("\n").length === 1) {
+      sanitize();
+    }
+    if (textArea.value.split("\n").length > 1) {
+      textArea.style = "height:200px; overflow-y:visible";
+      chatArea.style.height = "calc((var(--vh, 1vh) * 100) - 360px)";
+    }
   }
 });
 
@@ -58,7 +59,7 @@ textArea.addEventListener("keydown", function (event) {
   // Handle Shift + Enter for new line
   if (event.key === "Enter" && event.shiftKey) {
     event.preventDefault();
-    if (document.getElementById("attachmentPreview").style.display == "none")
+    if (document.getElementById("attachmentContainer").style.display != "block")
       addLine();
   }
 
@@ -78,12 +79,12 @@ function previewAttachment() {
   if (file) {
     const fileType = file.type;
     const fileSize = file.size;
-    const maxSize = 20 * 1024 * 1024; // 20MB in bytes
+    const maxSize = 1 * 1024 * 1024 * 1024; // 20MB in bytes
 
     if (fileSize > maxSize) {
-      console.log("File is too large. Please upload a file smaller than 20MB.");
+      // console.log("File is too large. Please upload a file smaller than 20MB.");
       document.getElementById("userInput").placeholder =
-        "File is too large. Please upload a file smaller than 20MB.";
+        "File is too large. Please upload a file smaller than 1GB.";
       return; // Stop further execution if the file is too large
     }
 
@@ -117,19 +118,16 @@ function previewAttachment() {
     // Validate file type for image, audio, or video
     if (fileType.startsWith("image/")) {
       if (!imageTypes.includes(fileType)) {
-        console.log("Invalid image file type.");
         err("Invalid image file type.");
         return;
       }
     } else if (fileType.startsWith("audio/")) {
       if (!audioTypes.includes(fileType)) {
-        console.log("Invalid audio file type.");
         err("Invalid audio file type.");
         return;
       }
     } else if (fileType.startsWith("video/")) {
       if (!videoTypes.includes(fileType)) {
-        console.log("Invalid video file type.");
         err("Invalid video file type.");
         return;
       }
@@ -138,12 +136,23 @@ function previewAttachment() {
     // Read the file only if it passes the image, audio, or video validation
     const reader = new FileReader();
     reader.onload = function (e) {
-      fileContent = e.target.result;
-      preview.src = e.target.result;
-      preview.style.display = "block"; // Show the preview
-      document.getElementById("attachmentContainer").style.display = "block";
-      document.getElementById("chat").style.height =
-        "calc((var(--vh, 1vh)* 100) - 295px)";
+      if (file.type.startsWith("image/")) {
+        fileContent = e.target.result;
+        preview.src = e.target.result;
+        preview.style.display = "block"; // Show the preview
+        document.getElementById("attachmentContainer").style.display = "block";
+        document.getElementById("chat").style.height =
+          "calc((var(--vh, 1vh)* 100) - 295px)";
+      } else {
+        fileContent = null;
+        document.getElementById("attachmentFile").innerHTML =
+          "📄 Attached File: " + file.name;
+        document.getElementById("attachmentFile").style.display = "block";
+        document.getElementById("attachmentPreview").style.display = "none";
+        document.getElementById("attachmentContainer").style.display = "block";
+        document.getElementById("chat").style.height =
+          "calc((var(--vh, 1vh)* 100) - 228px)";
+      }
     };
     reader.readAsDataURL(file);
     attachment = file; // Store the file for later use
@@ -159,6 +168,8 @@ function removeAttachment() {
   document.getElementById("chat").style.height =
     "calc((var(--vh, 1vh)* 100) - 205px)";
   document.getElementById("attachmentContainer").style.display = "none"; // Hide the preview
+  document.getElementById("attachmentFile").style.display = "none";
+  document.getElementById("attachmentPreview").style.display = "none";
   attachment = null;
   fileContent = null;
 }
@@ -224,7 +235,7 @@ async function getResponse(message) {
   }
 
   var aiMessage = result.response.text();
-  console.log(aiMessage);
+  // console.log(aiMessage);
   return aiMessage;
 }
 
@@ -239,6 +250,11 @@ async function sendMessage() {
   }
   disableForm();
   document.getElementById("info").style.display = "none";
+
+  input.value = ""; // Clear input after sending message
+  removeAttachment();
+  input.focus();
+
   // Add user message with profile picture
   addChatBubble(
     message,
@@ -259,11 +275,8 @@ async function sendMessage() {
     "./assets/img/artificial-intelligence.png"
   );
   enableForm();
-  input.value = ""; // Clear input after sending message
-  removeAttachment();
-  input.focus();
-  console.log(history);
-  document.querySelectorAll("pre code").forEach((block) => {
+  // console.log(history);
+  document.querySelectorAll("pre, code").forEach((block) => {
     hljs.highlightElement(block); // Highlight each new code block
   });
 }
@@ -282,19 +295,27 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   // Chat Bubble
   const bubble = document.createElement("div");
   bubble.classList.add("chat-bubble", bubbleClass);
-  bubble.innerHTML = marked.parse(text);
 
   // Append image and bubble to the container
   if (containerClass === "user-container") {
+    bubble.textContent = text;
     if (attachment != null) {
-      const uploading = document.createElement("img");
-      uploading.src = fileContent;
-      uploading.classList.add("attach-pic");
-      bubble.appendChild(uploading);
+      if (attachment.type.startsWith("image/")) {
+        const uploading = document.createElement("img");
+        uploading.src = fileContent;
+        uploading.classList.add("attach-pic");
+        bubble.appendChild(uploading);
+      } else {
+        const uploading = document.createElement("p");
+        uploading.innerHTML = "📄 Attached File: " + attachment.name;
+        uploading.classList.add("attach-file");
+        bubble.appendChild(uploading);
+      }
     }
     bubbleContainer.appendChild(bubble);
     bubbleContainer.appendChild(img); // User picture on the right
   } else {
+    bubble.innerHTML = marked.parse(text);
     bubbleContainer.appendChild(img); // AI picture on the left
     bubbleContainer.appendChild(bubble);
   }

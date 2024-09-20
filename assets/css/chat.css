@@ -27,7 +27,8 @@
     padding: 10px;
     border-radius: 15px;
     margin: 5px 0;
-    line-height: 1.5;
+    line-height: 1.25;
+    font-size: 14px;
 }
 
 /* User bubble on the right */
@@ -36,6 +37,8 @@
     color: var(--clr-background);
     border-bottom-right-radius: 0;
     max-width: 70%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 /* AI bubble on the left */
@@ -293,16 +296,19 @@ pre {
     display: none;
 }
 
+
 #pin svg {
     height: 45px;
     width: 45px;
     fill: var(--clr-foreground);
+    cursor: pointer;
 }
 
 #pin svg:hover {
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     color: var(--clr-foreground);
     border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Attachment preview container */
@@ -330,6 +336,11 @@ pre {
     padding: 5px;
     object-fit: cover;
     transition: color 0.3s ease;
+}
+
+.attach-file {
+    padding: 5px;
+    font-size: 14px;
 }
 
 /* Remove button for the attachment */
@@ -372,4 +383,9 @@ pre {
     position: relative;
     border: 2px solid red;
     border-radius: 20px;
+}
+
+#attachmentFile {
+    display: none;
+    color: var(--clr-foreground);
 }

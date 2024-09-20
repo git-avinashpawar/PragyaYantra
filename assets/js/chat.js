@@ -115,6 +115,10 @@ async function sendMessage() {
   }
   disableForm();
   document.getElementById("info").style.display = "none";
+
+  input.value = ""; // Clear input after sending message
+  input.focus();
+
   // Add user message with profile picture
   addChatBubble(
     message,
@@ -135,8 +139,6 @@ async function sendMessage() {
     "./assets/img/artificial-intelligence.png"
   );
   enableForm();
-  input.value = ""; // Clear input after sending message
-  input.focus();
   // console.log(history);
   document.querySelectorAll("pre code").forEach((block) => {
     hljs.highlightElement(block); // Highlight each new code block
@@ -157,12 +159,14 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   // Chat Bubble
   const bubble = document.createElement("div");
   bubble.classList.add("chat-bubble", bubbleClass);
-  bubble.innerHTML = marked.parse(text);
+  bubble.textContent = marked.parse(text);
   // Append image and bubble to the container
   if (containerClass === "user-container") {
+    bubble.textContent = text;
     bubbleContainer.appendChild(bubble);
     bubbleContainer.appendChild(img); // User picture on the right
   } else {
+    bubble.innerHTML = marked.parse(text);
     bubbleContainer.appendChild(img); // AI picture on the left
     bubbleContainer.appendChild(bubble);
   }

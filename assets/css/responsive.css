@@ -46,9 +46,11 @@
     }
 
     #pin svg {
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
+        transform: translateY(-5px);
     }
+
 }
 
 @media (min-width: 600px) and (max-width: 767px) {
@@ -94,7 +96,7 @@
 @media (min-width: 480px) and (max-width: 600px) {
     textarea#userInput {
         font-size: 12px;
-        padding: 10px;
+        padding: 13px;
     }
 
     .input-container button {
@@ -136,7 +138,7 @@
 @media (min-width: 320px) and (max-width: 480px) {
     textarea#userInput {
         font-size: 12px;
-        padding: 10px 5px 10px 5px;
+        padding: 13px;
     }
 
     .input-container button {

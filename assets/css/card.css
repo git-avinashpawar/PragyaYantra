@@ -46,7 +46,7 @@
   background-color: var(--clr-background);
   border-radius: 0px;
   /* min-height: calc(100vh - 116px); */
-  min-height: calc((var(--vh, 1vh) * 100) - 116px);
+  min-height: calc((var(--vh, 1vh) * 100) - 98px);
 }
 
 .card .icon-box {

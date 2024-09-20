@@ -548,8 +548,9 @@ section {
 
 #footer .copyright {
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   color: var(--clr-grey);
+  font-size: 10px;
 }
 
 #footer .credits {
@@ -614,7 +615,7 @@ ul {
   text-align: center;
   padding: 5px;
   color: var(--clr-grey);
-  font-size: 15px;
+  font-size: 10px;
 }
 
 #form {
