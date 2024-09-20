@@ -140,7 +140,7 @@ async function sendMessage() {
   );
   enableForm();
   // console.log(history);
-  document.querySelectorAll("pre code").forEach((block) => {
+  document.querySelectorAll("pre, code").forEach((block) => {
     hljs.highlightElement(block); // Highlight each new code block
   });
 }
