@@ -79,10 +79,10 @@ function previewAttachment() {
   if (file) {
     const fileType = file.type;
     const fileSize = file.size;
-    const maxSize = 1 * 1024 * 1024 * 1024; // 20MB in bytes
+    const maxSize = 1 * 1024 * 1024 * 1024; // 1BG in bytes
 
     if (fileSize > maxSize) {
-      // console.log("File is too large. Please upload a file smaller than 20MB.");
+      console.log("File is too large. Please upload a file smaller than 1GB.");
       document.getElementById("userInput").placeholder =
         "File is too large. Please upload a file smaller than 1GB.";
       return; // Stop further execution if the file is too large
@@ -153,9 +153,9 @@ function previewAttachment() {
         document.getElementById("chat").style.height =
           "calc((var(--vh, 1vh)* 100) - 228px)";
       }
+      attachment = file; // Store the file for later use
     };
     reader.readAsDataURL(file);
-    attachment = file; // Store the file for later use
   } else {
     removeAttachment(); // If no file, clear attachment
   }
@@ -252,7 +252,6 @@ async function sendMessage() {
   document.getElementById("info").style.display = "none";
 
   input.value = ""; // Clear input after sending message
-  removeAttachment();
   input.focus();
 
   // Add user message with profile picture
@@ -265,7 +264,7 @@ async function sendMessage() {
 
   //Write function to get ai resonse
   var aiMessage = await getResponse(message);
-  // var aiMessage = "To give you the best suggestions, I need to know more";
+  //var aiMessage = "To give you the best suggestions, I need to know more";
   // Simulate AI response (replace with actual AI integration)
 
   addChatBubble(
@@ -275,6 +274,7 @@ async function sendMessage() {
     "./assets/img/artificial-intelligence.png"
   );
   enableForm();
+  removeAttachment();
   // console.log(history);
   document.querySelectorAll("pre, code").forEach((block) => {
     hljs.highlightElement(block); // Highlight each new code block

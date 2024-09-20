@@ -26,7 +26,6 @@
 .chat-bubble {
     padding: 10px;
     border-radius: 15px;
-    margin: 5px 0;
     line-height: 1.25;
     font-size: 14px;
 }
@@ -154,7 +153,8 @@ textarea#userInput::-webkit-scrollbar-button {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 7px;
+    margin-top: auto;
+    align-items: flex-end;
 }
 
 
@@ -235,8 +235,6 @@ p {
     border-radius: 9999px;
     border: 2px solid var(--clr-grey);
     /* Rounded corners on the thumb */
-
-
 }
 
 /* On hover */
@@ -336,11 +334,13 @@ pre {
     padding: 5px;
     object-fit: cover;
     transition: color 0.3s ease;
+    display: block;
 }
 
 .attach-file {
     padding: 5px;
     font-size: 14px;
+    display: block;
 }
 
 /* Remove button for the attachment */
