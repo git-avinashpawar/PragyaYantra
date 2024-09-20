@@ -32,8 +32,8 @@
 
 /* User bubble on the right */
 .user-bubble {
-    background-color: #0d6efd;
-    color: var(--clr-background);
+    background-color: var(--clr-bubble);
+    color: var(--clr-foreground);
     border-bottom-right-radius: 0;
     max-width: 70%;
     white-space: pre-wrap;
@@ -68,7 +68,7 @@ input[type="text"] {
 
     border: none;
     padding: 10px;
-    width: 50vw;
+    width: 60vw;
     border-radius: 5px;
     font-size: 16px;
     background-color: var(--clr-background);
@@ -102,7 +102,6 @@ textarea#userInput {
 textarea#userInput::-webkit-scrollbar {
     width: 10px;
     height: 10px;
-
 }
 
 /* Scrollbar track */
@@ -116,15 +115,15 @@ textarea#userInput::-webkit-scrollbar-track {
 
 /* Scrollbar thumb */
 textarea#userInput::-webkit-scrollbar-thumb {
-    /* background-color: var(--clr-grey); */
+    background-color: var(--clr-code);
     border-radius: 9999px;
-    border: 2px solid var(--clr-grey);
-    /* Rounded corners on the thumb */
+    /* border: 2px solid var(--clr-grey); */
+
 }
 
 /* On hover */
 textarea#userInput::-webkit-scrollbar-thumb:hover {
-    background-color: var(--clr-grey);
+    background-color: var(--clr-code);
 }
 
 textarea#userInput::-webkit-scrollbar-button {
@@ -139,13 +138,13 @@ textarea#userInput::-webkit-scrollbar-button {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    border: 1px solid transparent;
+
 }
 
 .input-container button:hover {
     background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
     color: var(--clr-foreground);
-    border: 1px solid var(--clr-foreground);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Profile pictures */
@@ -238,15 +237,14 @@ p {
 
 /* Scrollbar thumb */
 .chat-container::-webkit-scrollbar-thumb {
-    /* background-color: var(--clr-grey); */
+    background-color: var(--clr-code);
     border-radius: 9999px;
-    border: 2px solid var(--clr-grey);
-    /* Rounded corners on the thumb */
+    /* border: 2px solid var(--clr-grey); */
 }
 
 /* On hover */
 .chat-container::-webkit-scrollbar-thumb:hover {
-    background-color: var(--clr-grey);
+    background-color: var(--clr-code);
 }
 
 .chat-container::-webkit-scrollbar-button {
@@ -283,7 +281,7 @@ code {
 }
 
 strong {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 pre {
@@ -291,6 +289,7 @@ pre {
     background: var(--clr-code);
     padding: 10px;
     border-radius: 10px;
+    width: 60%;
 }
 
 .hljs {
