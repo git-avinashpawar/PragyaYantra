@@ -48,6 +48,7 @@
     overflow-y: auto;
     padding-left: 20px;
     min-height: 40px;
+    max-width: 85%;
 }
 
 .input-container {
