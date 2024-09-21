@@ -101,8 +101,8 @@ textarea#userInput {
 
 /* Horizontal scrollbar height */
 textarea#userInput::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
 }
 
 /* Scrollbar track */
@@ -221,7 +221,7 @@ p {
 
 /* Horizontal scrollbar height */
 .chat-container::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
     height: 8px;
 
     /* Adjust the height of the horizontal scrollbar */
@@ -290,7 +290,9 @@ pre {
     background: var(--clr-code);
     padding: 10px;
     border-radius: 10px;
-    width: 60%;
+    max-width: 100%;
+    white-space: pre-wrap;
+    display: inline-block;
 }
 
 .hljs {

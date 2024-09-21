@@ -20,14 +20,6 @@
     .chat-container {
         padding: 10px;
     }
-
-    /* Horizontal scrollbar height */
-    .chat-container::-webkit-scrollbar {
-        width: 8px;
-        height: 7px;
-
-        /* Adjust the height of the horizontal scrollbar */
-    }
 }
 
 /* Width between 767px to 0 */
@@ -35,14 +27,6 @@
 @media (max-width: 767px) {
     .chat-container {
         padding: 10px;
-    }
-
-    /* Horizontal scrollbar height */
-    .chat-container::-webkit-scrollbar {
-        width: 8px;
-        height: 7px;
-
-        /* Adjust the height of the horizontal scrollbar */
     }
 
     #pin svg {
