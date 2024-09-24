@@ -35,6 +35,10 @@
         transform: translateY(-5px);
     }
 
+    .card-align {
+        margin: 0vh 0vh;
+    }
+
 }
 
 @media (min-width: 600px) and (max-width: 767px) {

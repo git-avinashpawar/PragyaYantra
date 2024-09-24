@@ -28,6 +28,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet" />
   <link href="assets/css/card.css" rel="stylesheet" />
+  <link href="assets/css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -68,7 +69,7 @@
 
   <!--  Section  -->
   <section class="card" id="year">
-    <div class="container align-items-center">
+    <div class="container align-items-center mt-lg-4 ">
       <div class="row justify-content-center heading border-bottom">
 
         <h1 class="sp">PragyaYantra | प्रज्ञायन्त्र </h1>
@@ -76,15 +77,15 @@
           generative AI capabilities.</p>
 
       </div>
-      <div class="row">
-        <div class="row justify-content-center heading" style="margin-left: 0px; margin-right: 0px">
+      <div class="row card-align">
+        <!-- <div class="row justify-content-center heading" style="margin-left: 0px; margin-right: 0px">
           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
             <h3 class="sp">Text Generation</h3>
           </div>
-        </div>
+        </div> -->
 
         <div class="col-lg-4 col-md-4 d-flex align-items-stretch cardspace">
-          <div class="icon-box">
+          <div class="icon-box ">
             <div class="img-fluid icon">
               <a class="img-fluid" href="./text.html">
                 <svg viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)">
@@ -132,24 +133,98 @@
         <div class="col-lg-4 col-md-4 d-flex align-items-stretch cardspace">
           <div class="icon-box">
             <div class="img-fluid icon">
-              <a class="img-fluid" href="./image.html">
-                <svg viewBox="-1 0 19 19" xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg">
+              <a class="img-fluid" href="./attach.html">
+                <svg xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" transform="scale(-1 1)"
+                  viewBox="-1 0 19 19">
                   <path
-                    d="M16.5 9.5a8 8 0 1 1-8-8 8 8 0 0 1 8 8zm-2.874-2.287a.803.803 0 0 0-.8-.8h-2.054v-.251a.802.802 0 0 0-.8-.8h-2.93a.802.802 0 0 0-.8.8v.25H4.186a.802.802 0 0 0-.8.8v5.166a.802.802 0 0 0 .8.8h8.639a.803.803 0 0 0 .8-.8zm-2.692 2.582a2.427 2.427 0 1 1-2.428-2.427 2.428 2.428 0 0 1 2.428 2.427zm-4.055 0a1.627 1.627 0 1 0 1.627-1.627A1.63 1.63 0 0 0 6.88 9.795zm2.75-3.931a.4.4 0 1 0 .4.4.4.4 0 0 0-.4-.4z" />
+                    d="M16.417 9.579A7.917 7.917 0 1 1 8.5 1.662a7.917 7.917 0 0 1 7.917 7.917zm-2.899 2.037a2.818 2.818 0 0 0-.832-1.975L7.76 4.713a.396.396 0 0 0-.56.56l4.928 4.928a2.032 2.032 0 0 1 .6 1.423 1.928 1.928 0 0 1-1.944 1.965h-.021a2.032 2.032 0 0 1-1.424-.6L4.613 8.265a1.176 1.176 0 0 1 0-1.663l.046-.046a1.177 1.177 0 0 1 1.662 0l4.806 4.806a.444.444 0 1 1-.628.629L7.247 8.738a.396.396 0 1 0-.56.56l3.252 3.251a1.236 1.236 0 1 0 1.748-1.747L6.88 5.995a1.97 1.97 0 0 0-2.781 0l-.046.046a1.97 1.97 0 0 0 0 2.782l4.726 4.726a2.82 2.82 0 0 0 1.974.832h.03a2.72 2.72 0 0 0 2.735-2.765z" />
                 </svg>
               </a>
             </div>
             <div class="icon">
-              <h4><a href="./image.html">YantraVision</a></h4>
+              <h4><a href="./attach.html">YantraAttach</a></h4>
             </div>
             <div class="none">
               <p>
-                <a href="./image.html"> Where Images and Words Converge</a>
+                <a href="./attach.html">Where Files and Words Converge</a>
               </p>
               <h5>Uses gemini-1.5-flash</h5>
             </div>
           </div>
         </div>
+
+
+        <div class="col-lg-4 col-md-4 d-flex align-items-stretch cardspace">
+          <div class="icon-box">
+            <div class="img-fluid icon">
+              <a class="img-fluid" href="./doc.html">
+                <svg xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" viewBox="-1 0 19 19">
+                  <path
+                    d="M16.417 9.579A7.917 7.917 0 1 1 8.5 1.662a7.917 7.917 0 0 1 7.917 7.917zm-4.233-1.805H9.259a.317.317 0 0 1-.317-.317v-2.9H5.16a.318.318 0 0 0-.317.317v9.368a.318.318 0 0 0 .317.316h6.707a.317.317 0 0 0 .317-.316zM6.599 6.212a.792.792 0 1 0 .791.792.792.792 0 0 0-.791-.792zm4.448 2.681H5.833v.792h5.214zm0 1.69H5.833v.792h5.214zm0 1.69H5.833v.792h5.214zM9.737 6.98h2.431l-2.43-2.416z" />
+                </svg>
+              </a>
+            </div>
+            <div class="icon">
+              <h4><a href="./doc.html">YantraDoc</a></h4>
+            </div>
+            <div class="none">
+              <p>
+                <a href="./doc.html">Unlock Your Document's Insight</a>
+              </p>
+              <h5>Uses gemini-1.5-flash</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 d-flex align-items-stretch cardspace">
+          <div class="icon-box">
+            <div class="img-fluid icon">
+              <a class="img-fluid" href="./attach.html">
+                <svg xmlns="http://www.w3.org/2000/svg" class="cf-icon-svg" viewBox="-1 0 19 19">
+                  <path
+                    d="M16.417 9.583A7.917 7.917 0 1 1 8.5 1.666a7.917 7.917 0 0 1 7.917 7.917zm-3.297 3.103-2.424-2.424a3.978 3.978 0 1 0-1.119 1.12l2.424 2.423a.791.791 0 1 0 1.119-1.12zM9.633 5.808a3.189 3.189 0 1 1-2.255-.934 3.167 3.167 0 0 1 2.255.934z" />
+                </svg>
+              </a>
+            </div>
+            <div class="icon">
+              <h4><a href="./attach.html">YantraQuery</a></h4>
+            </div>
+            <div class="none">
+              <p>
+                <a href="./attach.html">Analyze, and Generate SQL Effortlessly</a>
+              </p>
+              <h5>Uses gemini-1.5-flash</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 d-flex align-items-stretch cardspace">
+          <div class="icon-box">
+            <div class="img-fluid icon">
+              <a class="img-fluid" href="./attach.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                  <path
+                    d="M464.123 319.056c0-12.3-10-22.3-22.3-22.3-12.4 0-22.3 10-22.3 22.3s10 22.3 22.3 22.3 22.3-10 22.3-22.3Zm95.8 385.9c0 12.3 10 22.3 22.3 22.3s22.3-9.9 22.3-22.3c0-12.3-10-22.3-22.3-22.3s-22.3 10-22.3 22.3Z" />
+                  <path fill-rule="evenodd"
+                    d="M1024 512c0 282.77-229.23 512-512 512S0 794.77 0 512 229.23 0 512 0s512 229.23 512 512ZM388.323 313.756s-8.1-56.3 121.8-56.3c135.8 0 125.4 67.9 125.4 67.9v112.2c0 67.9-69.1 66.8-69.1 66.8h-123c-73.7 0-71.4 72.6-71.4 72.6v60.8h-43.3s-72.6 4.7-72.6-126.4 83.1-121.7 83.1-121.7h173.2v-17.5h-124l-.1-58.4Zm247.3 396.5s8.1 56.3-121.8 56.3c-135.7 0-125.4-67.9-125.4-67.9v-112.2c0-67.9 69.1-66.8 69.1-66.8h123c73.7 0 71.4-72.6 71.4-72.6v-60.8h43.3s72.6-4.7 72.6 126.4-83.1 121.7-83.1 121.7h-173.2v17.5h124l.1 58.4Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+            <div class="icon">
+              <h4><a href="./attach.html">YantraCode</a></h4>
+            </div>
+            <div class="none">
+              <p>
+                <a href="./attach.html">Code Python with AI-Powered Precision</a>
+              </p>
+              <h5>Uses gemini-1.5-flash</h5>
+            </div>
+          </div>
+        </div>
+
+
+
 
 
         <!-- For Future Use -->

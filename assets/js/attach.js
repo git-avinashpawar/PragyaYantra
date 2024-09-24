@@ -83,8 +83,7 @@ function previewAttachment() {
 
     if (fileSize > maxSize) {
       console.log("File is too large. Please upload a file smaller than 1GB.");
-      document.getElementById("userInput").placeholder =
-        "File is too large. Please upload a file smaller than 1GB.";
+      err("File is too large. Please upload a file smaller than 1GB.");
       return; // Stop further execution if the file is too large
     }
 

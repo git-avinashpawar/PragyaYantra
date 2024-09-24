@@ -629,6 +629,11 @@ ul {
   position: relative;
 }
 
-h5 {
+h5,
+h6 {
   color: var(--clr-grey);
+}
+
+h6 {
+  font-size: 14px;
 }
