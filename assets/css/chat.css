@@ -282,7 +282,9 @@ code {
 }
 
 strong {
-    font-weight: 500;
+    font-weight: 700;
+    font-family: sans-serif;
+    font-size: 15px;
 }
 
 pre {
@@ -325,6 +327,7 @@ pre {
     opacity: 0.9;
     padding: 5px;
     display: none;
+    max-width: 60vw;
 }
 
 /* Attachment preview image */

@@ -69,11 +69,17 @@ textArea.addEventListener("keydown", function (event) {
   }
 });
 //----------------- JS For UI Management -----------------//
-
 function previewAttachment() {
   const fileInput = document.getElementById("fileInput");
   const preview = document.getElementById("attachmentPreview");
   const files = fileInput.files; // Get all selected files
+
+  // Enforce maximum of 5 files
+  if (files.length > 5) {
+    console.log("You can only upload a maximum of 5 files.");
+    err("Please upload max 5 files.");
+    return;
+  }
 
   if (files.length > 0) {
     // Clear previous data
@@ -92,16 +98,23 @@ function previewAttachment() {
         console.log(
           "File is too large. Please upload a file smaller than 1GB."
         );
-        err("File is too large. Please upload a file smaller than 1GB.");
+        err("Please upload max 1GB Files.");
         return;
       }
 
       const fileName = file.name.toLowerCase();
 
       // File type validation (only .txt and .pdf)
-      if (!fileName.endsWith(".txt") && !fileName.endsWith(".pdf")) {
-        console.log("Invalid file type. Only .txt and .pdf files are allowed.");
-        err("Invalid file type. Only .txt and .pdf files are allowed.");
+      if (
+        !fileName.endsWith(".txt") &&
+        !fileName.endsWith(".pdf") &&
+        !fileName.endsWith(".html") &&
+        !fileName.endsWith(".csv")
+      ) {
+        console.log(
+          "Invalid file type. Only .txt, .pdf, .html, and .csv files are allowed."
+        );
+        err("Only txt, pdf, html, and csv files are allowed.");
         return;
       }
 
@@ -148,7 +161,11 @@ function removeAttachment() {
 // Important note Gemini tracks the history itself no need to push messages in history on your own
 
 //Import @google/generative-ai.
-import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+import {
+  GoogleGenerativeAI,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "https://esm.run/@google/generative-ai";
 import { GoogleAIFileManager } from "./AIServer.mjs";
 
 // Import Marked
@@ -160,11 +177,11 @@ import { ABCD } from "../config/config.js";
 let history = [
   {
     role: "user",
-    parts: [{ text: "Hello" }],
-  },
-  {
-    role: "model",
-    parts: [{ text: "Great to meet you. What would you like to know?" }],
+    parts: [
+      {
+        text: 'You are playing the role of a Document Analyzer; you will process text-based documents. I will now provide you with text-based or PDF documents. If a PDF is uploaded, please extract the text and work with it. At the beginning of your answer, please state on which documents you are working in the format: "**Working on: [file names].**". Also When discussing content from any file, please mention the filename in format: **filename** without file extension and then content to new line. Answer the questions as precisely as possible using the provided documents. If the answer is not in the document, say, "Answer not available in document."',
+      },
+    ],
   },
 ];
 
@@ -175,32 +192,52 @@ async function getResponse(message) {
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(AI_ABCD);
   const fileManager = new GoogleAIFileManager(AI_ABCD);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  var imagedata = null;
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    },
+  ];
+
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    safetySettings,
+  });
+
+  var imageParts = [];
   let result = null;
 
   const chat = model.startChat({
     history: history,
   });
 
-  if (attachment != null) {
-    const uploadResult = await fileManager.uploadFile(attachment, {
-      mimeType: attachment.type,
-      displayName: attachment.name,
-    });
-    // View the response.
-    console.log(
-      `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`
-    );
-    imagedata = {
-      fileData: {
-        fileUri: uploadResult.file.uri,
-        mimeType: uploadResult.file.mimeType,
-      },
-    };
+  if (attachments.length > 0) {
+    for (let i = 0; i < attachments.length; i++) {
+      const attachment = attachments[i];
+      const uploadResult = await fileManager.uploadFile(attachment, {
+        mimeType: attachment.type,
+        displayName: attachment.name,
+      });
+      console.log(
+        `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`
+      );
+      imageParts.push({
+        fileData: {
+          fileUri: uploadResult.file.uri,
+          mimeType: uploadResult.file.mimeType,
+        },
+      });
+    }
+  }
 
-    result = await chat.sendMessage([message, imagedata]);
+  if (attachments.length > 0) {
+    result = await chat.sendMessage([message, ...imageParts]); // Imp for Multifiles
+    console.log(imageParts);
   } else {
     result = await chat.sendMessage(message);
   }
@@ -233,9 +270,10 @@ async function sendMessage() {
     "./assets/img/user.png"
   );
 
+  document.getElementById("attachmentContainer").style.display = "none";
   //Write function to get ai resonse
-  // var aiMessage = await getResponse(message);
-  var aiMessage = "To give you the best suggestions, I need to know more";
+  var aiMessage = await getResponse(message);
+  // var aiMessage = "To give you the best suggestions, I need to know more";
   // Simulate AI response (replace with actual AI integration)
 
   addChatBubble(
@@ -269,13 +307,8 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   // Append image and bubble to the container
   if (containerClass === "user-container") {
     bubble.textContent = text;
-    if (attachment != null) {
-      if (attachment.type.startsWith("image/")) {
-        const uploading = document.createElement("img");
-        uploading.src = fileContent;
-        uploading.classList.add("attach-pic");
-        bubble.appendChild(uploading);
-      } else {
+    if (attachments.length > 0) {
+      for (const attachment of attachments) {
         const uploading = document.createElement("p");
         uploading.innerHTML = "📄 Attached File: " + attachment.name;
         uploading.classList.add("attach-file");

@@ -1,6 +1,5 @@
-let attachment = null;
-let fileContent = null;
-
+let attachments = [];
+let fileContents = [];
 //----------------- JS For UI Management -----------------//
 
 const textArea = document.getElementById("userInput");
@@ -70,107 +69,93 @@ textArea.addEventListener("keydown", function (event) {
   }
 });
 //----------------- JS For UI Management -----------------//
-
 function previewAttachment() {
   const fileInput = document.getElementById("fileInput");
   const preview = document.getElementById("attachmentPreview");
-  const file = fileInput.files[0];
+  const files = fileInput.files; // Get all selected files
 
-  if (file) {
-    const fileType = file.type;
-    const fileSize = file.size;
-    const maxSize = 1 * 1024 * 1024 * 1024; // 1BG in bytes
+  // Enforce maximum of 5 files
+  if (files.length > 5) {
+    console.log("You can only upload a maximum of 5 files.");
+    err("Please upload max 5 files.");
+    return;
+  }
 
-    if (fileSize > maxSize) {
-      console.log("File is too large. Please upload a file smaller than 1GB.");
-      err("File is too large. Please upload a file smaller than 1GB.");
-      return; // Stop further execution if the file is too large
-    }
+  if (files.length > 0) {
+    // Clear previous data
+    attachments = [];
+    fileContents = [];
+    let fileNames = [];
 
-    const imageTypes = [
-      "image/png",
-      "image/jpeg",
-      "image/webp",
-      "image/heic",
-      "image/heif",
-    ];
-    const audioTypes = [
-      "audio/wav",
-      "audio/mp3",
-      "audio/aiff",
-      "audio/aac",
-      "audio/ogg",
-      "audio/flac",
-    ];
-    const videoTypes = [
-      "video/mp4",
-      "video/mpeg",
-      "video/mov",
-      "video/avi",
-      "video/x-flv",
-      "video/mpg",
-      "video/webm",
-      "video/wmv",
-      "video/3gpp",
-    ];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const fileType = file.type;
+      const fileSize = file.size;
+      const maxSize = 1 * 1024 * 1024 * 1024; // 1GB in bytes
 
-    // Validate file type for image, audio, or video
-    if (fileType.startsWith("image/")) {
-      if (!imageTypes.includes(fileType)) {
-        err("Invalid image file type.");
+      // File size validation
+      if (fileSize > maxSize) {
+        console.log(
+          "File is too large. Please upload a file smaller than 1GB."
+        );
+        err("Please upload max 1GB Files.");
         return;
       }
-    } else if (fileType.startsWith("audio/")) {
-      if (!audioTypes.includes(fileType)) {
-        err("Invalid audio file type.");
-        return;
-      }
-    } else if (fileType.startsWith("video/")) {
-      if (!videoTypes.includes(fileType)) {
-        err("Invalid video file type.");
-        return;
-      }
-    }
 
-    // Read the file only if it passes the image, audio, or video validation
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      if (file.type.startsWith("image/")) {
-        fileContent = e.target.result;
-        preview.src = e.target.result;
-        preview.style.display = "block"; // Show the preview
-        document.getElementById("attachmentContainer").style.display = "block";
-        document.getElementById("chat").style.height =
-          "calc((var(--vh, 1vh)* 100) - 295px)";
-      } else {
-        fileContent = null;
-        document.getElementById("attachmentFile").innerHTML =
-          "📄 Attached File: " + file.name;
+      const fileName = file.name.toLowerCase();
+
+      // File type validation (only .txt and .pdf)
+      if (
+        !fileName.endsWith(".txt") &&
+        !fileName.endsWith(".pdf") &&
+        !fileName.endsWith(".html") &&
+        !fileName.endsWith(".csv")
+      ) {
+        console.log(
+          "Invalid file type. Only .txt, .pdf, .html, and .csv files are allowed."
+        );
+        err("Only txt, pdf, html, and csv files are allowed.");
+        return;
+      }
+
+      // Push file name to the fileNames array for display
+      fileNames.push(file.name);
+
+      // Read the file content asynchronously
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        fileContents.push(null); // Non-image files don’t need preview content
         document.getElementById("attachmentFile").style.display = "block";
         document.getElementById("attachmentPreview").style.display = "none";
         document.getElementById("attachmentContainer").style.display = "block";
         document.getElementById("chat").style.height =
           "calc((var(--vh, 1vh)* 100) - 228px)";
-      }
-      attachment = file; // Store the file for later use
-    };
-    reader.readAsDataURL(file);
+
+        attachments.push(file); // Store the file in the attachments array
+      };
+      reader.readAsDataURL(file); // Read each file
+    }
+
+    // Display all file names, separated by commas
+    document.getElementById("attachmentFile").innerHTML =
+      "📎 Attached Files: " + fileNames.join(", ");
   } else {
-    removeAttachment(); // If no file, clear attachment
+    removeAttachment(); // Clear attachment if no files are selected
   }
 }
 
 function removeAttachment() {
   // Clear the file input and preview
   document.getElementById("fileInput").value = "";
+  document.getElementById("attachmentFile").innerHTML = "📎 Attached Files:";
   document.getElementById("attachmentPreview").src = "";
   document.getElementById("chat").style.height =
     "calc((var(--vh, 1vh)* 100) - 205px)";
   document.getElementById("attachmentContainer").style.display = "none"; // Hide the preview
   document.getElementById("attachmentFile").style.display = "none";
   document.getElementById("attachmentPreview").style.display = "none";
-  attachment = null;
-  fileContent = null;
+  attachments = [];
+  fileContents = [];
 }
 
 // Important note Gemini tracks the history itself no need to push messages in history on your own
@@ -188,11 +173,11 @@ import { ABCD } from "../config/config.js";
 let history = [
   {
     role: "user",
-    parts: [{ text: "Hello" }],
-  },
-  {
-    role: "model",
-    parts: [{ text: "Great to meet you. What would you like to know?" }],
+    parts: [
+      {
+        text: "You are a Python coding expert. You will take user inputs and generate functional Python code based on the requirements. Additionally, you can process input from uploaded files to assist in answering questions or generating code. Provide answers as precisely as possible and ensure the generated code is efficient and high-quality.",
+      },
+    ],
   },
 ];
 
@@ -203,32 +188,45 @@ async function getResponse(message) {
   // import { GoogleGenerativeAI } from "@google/generative-ai";
   const genAI = new GoogleGenerativeAI(AI_ABCD);
   const fileManager = new GoogleAIFileManager(AI_ABCD);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  var imagedata = null;
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    tools: [
+      {
+        codeExecution: {},
+      },
+    ],
+  });
+
+  var imageParts = [];
   let result = null;
 
   const chat = model.startChat({
     history: history,
   });
 
-  if (attachment != null) {
-    const uploadResult = await fileManager.uploadFile(attachment, {
-      mimeType: attachment.type,
-      displayName: attachment.name,
-    });
-    // View the response.
-    console.log(
-      `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`
-    );
-    imagedata = {
-      fileData: {
-        fileUri: uploadResult.file.uri,
-        mimeType: uploadResult.file.mimeType,
-      },
-    };
+  if (attachments.length > 0) {
+    for (let i = 0; i < attachments.length; i++) {
+      const attachment = attachments[i];
+      const uploadResult = await fileManager.uploadFile(attachment, {
+        mimeType: attachment.type,
+        displayName: attachment.name,
+      });
+      console.log(
+        `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`
+      );
+      imageParts.push({
+        fileData: {
+          fileUri: uploadResult.file.uri,
+          mimeType: uploadResult.file.mimeType,
+        },
+      });
+    }
+  }
 
-    result = await chat.sendMessage([message, imagedata]);
+  if (attachments.length > 0) {
+    result = await chat.sendMessage([message, ...imageParts]); // Imp for Multifiles
+    console.log(imageParts);
   } else {
     result = await chat.sendMessage(message);
   }
@@ -264,7 +262,7 @@ async function sendMessage() {
   document.getElementById("attachmentContainer").style.display = "none";
   //Write function to get ai resonse
   var aiMessage = await getResponse(message);
-  //var aiMessage = "To give you the best suggestions, I need to know more";
+  // var aiMessage = "To give you the best suggestions, I need to know more";
   // Simulate AI response (replace with actual AI integration)
 
   addChatBubble(
@@ -298,13 +296,8 @@ function addChatBubble(text, bubbleClass, containerClass, profilePic) {
   // Append image and bubble to the container
   if (containerClass === "user-container") {
     bubble.textContent = text;
-    if (attachment != null) {
-      if (attachment.type.startsWith("image/")) {
-        const uploading = document.createElement("img");
-        uploading.src = fileContent;
-        uploading.classList.add("attach-pic");
-        bubble.appendChild(uploading);
-      } else {
+    if (attachments.length > 0) {
+      for (const attachment of attachments) {
         const uploading = document.createElement("p");
         uploading.innerHTML = "📄 Attached File: " + attachment.name;
         uploading.classList.add("attach-file");
