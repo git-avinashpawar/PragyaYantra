@@ -39,6 +39,9 @@
         margin: 0vh 0vh;
     }
 
+    strong {
+        font-size: 12px;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 767px) {
