@@ -639,7 +639,7 @@ h6 {
 }
 
 .err404 {
-  height: calc((var(--vh, 1vh) * 90));
+  height: calc((var(--vh, 1vh) * 100) - 98px);
   text-align: center;
   justify-content: center;
   align-items: center;
