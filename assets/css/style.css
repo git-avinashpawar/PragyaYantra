@@ -639,11 +639,11 @@ h6 {
 }
 
 .err404 {
-  height: 90vh;
+  height: calc((var(--vh, 1vh) * 90));
   text-align: center;
   justify-content: center;
   align-items: center;
-  padding-top: 30vh;
+  padding-top: calc((var(--vh, 1vh) * 30));
 }
 
 button {
